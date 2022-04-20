@@ -1,0 +1,183 @@
+/*
+display property aspects:
+	inline
+		- has no height and width
+		- margin - horizontal only
+		- padding - horizontal works normally but vertically overflows parent
+    - can have other elements on horizontal sides
+	
+	inline-block
+		- has completely functioning height, width, margin, and padding
+    - can have other elements on horizontal sides
+	
+	block
+		- starts on a new line
+		- defaults full width
+    - normally can't have other elements on horizontal sides
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 150px 1fr 100px;
+
+  gap: 16px 32px;
+  grid-template-areas:
+    "header header"
+    "aside main"
+    "footer footer";
+
+  padding: 16px;
+  background: lightgrey;
+  border: 1px solid red;
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  grid-area: header;
+  background: lightgrey;
+  border: 2px solid black;
+
+  display: flex;
+  align-items: center;
+  padding: 16px;
+}
+
+/* img is inline element */
+/* vertical-align: bottom; */
+img {
+  width: 100%;
+  height: auto;
+  /* display: block; */
+}
+header > a {
+  border: 1px solid green;
+  /* display: inline-block; */
+}
+a > img {
+  border: 1px solid black;
+  /* img is inline element */
+  /* vertical-align: bottom; */
+  display: block;
+  margin: 0;
+  padding: 0;
+
+  transition: all 0.5s ease-in-out;
+}
+a > img:hover {
+  opacity: 0.5;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding: 0 16px;
+  gap: 16px;
+}
+ul li a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 16px 32px;
+  border: 1px solid grey;
+  background-color: aquamarine;
+
+  transition: all 0.5s ease-in-out;
+}
+ul li a:hover {
+  /* font-weight: bold; */
+  /* border: 1px solid green; */
+  background: blueviolet;
+  color: wheat;
+}
+
+main {
+  grid-area: main;
+  background: wheat;
+  border: 2px solid black;
+}
+
+aside {
+  grid-row-end: 3;
+  grid-area: aside;
+  background: grey;
+  border: 2px solid black;
+  padding: 16px;
+}
+aside ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  gap: 64px;
+}
+aside ul li a {
+  padding: 8px 16px;
+}
+
+footer {
+  grid-area: footer;
+  background: darkgrey;
+  border: 2px solid black;
+  padding: 16px;
+}
+footer ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  gap: 4px;
+}
+footer ul li a {
+  padding: 4px 8px;
+}
+
+/* v3  */
+main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr 1fr;
+  padding: 16px;
+  gap: 8px;
+}
+main > div {
+  border: 1px solid lightslategray;
+  background: lightblue;
+  padding: 4px;
+}
+
+main > div:nth-child(5n - 4) {
+  border: 3px solid red;
+  background: yellow;
+  grid-column-start: span 2;
+  grid-row-start: span 2;
+}
+main > div:nth-child(5n - 3) {
+  border: 4px solid blueviolet;
+  background: red;
+  grid-row-start: span 4;
+}
+main > div:nth-child(5n - 2) {
+  border: 1px solid lightslategray;
+  background: brown;
+}
+main > div:nth-child(5n - 1) {
+  border: 1px solid lightslategray;
+  background: blue;
+}
+main > div:nth-child(5n) {
+  border: 1px solid lightslategray;
+  background: green;
+  grid-column-start: span 2;
+}
